@@ -11,27 +11,19 @@ fun main(args: Array<String>) {
     val codMode = line?.getStringOrNull("codMode")
         ?: throw Exception("codMode not found")
 
-    val codLine = line.getPropertyOrNull("lines")
-        ?.getPropertyOrNull("LineInformation")
-        ?.getStringOrNull("codLine")
+    val codLine = line.getStringOrNull("codLine")
         ?: throw Exception("codLine not found")
 
-    val codeItinerary = line.getPropertyOrNull("itinerary")
-        ?.getArrayOrNull("Itinerary")
-        ?.getOrNull(0)
+    val codeItinerary = line.itinerary
         ?.getStringOrNull("codeItinerary")
         ?: throw Exception("codeItinerary not found")
 
-    val codStop = line.getPropertyOrNull("itinerary")
-        ?.getArrayOrNull("Itinerary")
-        ?.getOrNull(0)
+    val codStop = line.itinerary
         ?.getPropertyOrNull("Stops")
         ?.getArrayOrNull("StopInformation")?.getOrNull(0)?.getStringOrNull("codStop")
         ?: throw Exception("codStop not found")
 
-    val direction = line.getPropertyOrNull("itinerary")
-        ?.getArrayOrNull("Itinerary")
-        ?.getOrNull(0)
+    val direction = line.itinerary
         ?.getStringOrNull("direction")
         ?: throw Exception("direction not found")
 
@@ -42,3 +34,6 @@ fun main(args: Array<String>) {
     val info = JsonReader.read(infoStream)
     println(info.serializePretty())
 }
+
+val JsonNode.itinerary: JsonNode?
+    get() = getPropertyOrNull("itinerary")?.getArrayOrNull("Itinerary")?.getOrNull(0)
