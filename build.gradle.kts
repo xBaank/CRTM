@@ -10,9 +10,11 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
+    implementation("com.github.xBaank:simpleJson:5.0.0")
     testImplementation(kotlin("test"))
 }
 
