@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.xBaank:simpleJson:5.0.0")
+    implementation("com.github.xBaank:simpleJson:5.0.1")
     testImplementation(kotlin("test"))
 }
 
