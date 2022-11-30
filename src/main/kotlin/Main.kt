@@ -2,7 +2,7 @@ import java.net.URI
 
 fun main(args: Array<String>) {
     val lineStream =
-        URI("https://www.crtm.es/widgets/api/GetLinesInformation.php?activeItinerary=1&codLine=8__450___").toURL()
+        URI("$CRTM_URL/GetLinesInformation.php?activeItinerary=1&codLine=8__450___").toURL()
             .openStream()
 
     val line = JsonReader.read(lineStream).getPropertyOrNull("lines")?.getPropertyOrNull("LineInformation")
@@ -16,21 +16,22 @@ fun main(args: Array<String>) {
     val codLine = line.getStringOrNull("codLine")
         ?: throw Exception("codLine not found")
 
-    val codeItinerary = line.itinerary
+    val codeItinerary = line.getItineraryOrNull()
         ?.getStringOrNull("codItinerary")
         ?: throw Exception("codeItinerary not found")
 
-    val codStop = line.itinerary?.stops
+    val codStop = line.getItineraryOrNull()
+        ?.getStopsOrNull()
         ?.firstOrNull { it.getStringOrNull("address")?.contains("UNIVERSIDAD") == true }
         ?.getStringOrNull("codStop")
         ?: throw Exception("codStop not found")
 
-    val direction = line.itinerary
+    val direction = line.getItineraryOrNull()
         ?.getNumberOrNull("direction")
         ?: throw Exception("direction not found")
 
     val infoStream =
-        URI("https://www.crtm.es/widgets/api/GetLineLocation.php?mode=$codMode&codItinerary=$codeItinerary&codLine=$codLine&codStop=$codStop&direction=$direction").toURL()
+        URI("$CRTM_URL/GetLineLocation.php?mode=$codMode&codItinerary=$codeItinerary&codLine=$codLine&codStop=$codStop&direction=$direction").toURL()
             .openStream()
 
     val stopType = 3
@@ -38,7 +39,7 @@ fun main(args: Array<String>) {
     val orderBy = 2
 
     val stopTimes =
-        URI("https://www.crtm.es/widgets/api/GetStopsTimes.php?codStop=$codStop&type=$stopType&orderBy=$orderBy&stopTimesByIti=$codeItinerary").toURL()
+        URI("$CRTM_URL/GetStopsTimes.php?codStop=$codStop&type=$stopType&orderBy=$orderBy&stopTimesByIti=$codeItinerary").toURL()
             .openStream()
 
     val info = JsonReader.read(infoStream)
@@ -48,8 +49,6 @@ fun main(args: Array<String>) {
     println(stopTimesJson.serializePretty())
 }
 
-val JsonNode.itinerary: JsonNode?
-    get() = getPropertyOrNull("itinerary")?.getArrayOrNull("Itinerary")?.getOrNull(1)
+private fun JsonNode.getItineraryOrNull() = getPropertyOrNull("itinerary")?.getArrayOrNull("Itinerary")?.getOrNull(1)
 
-val JsonNode.stops: JsonArray?
-    get() = getPropertyOrNull("stops")?.getArrayOrNull("StopInformation")
+private fun JsonNode.getStopsOrNull() = getPropertyOrNull("stops")?.getArrayOrNull("StopInformation")
