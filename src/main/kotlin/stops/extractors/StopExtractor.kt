@@ -1,27 +1,30 @@
-package stops
+package stops.extractors
 
 import JsonNode
 import extensions.inList
 import getArrayOrNull
 import getPropertyOrNull
 import getStringOrNull
+import lines.CodLine
+import stops.CodStop
+import stops.Stop
 import toArrayOrNull
 import toDoubleOrNull
 import toJson
 import toStringOrNull
 
-class StopExtractor(val jsonNode: JsonNode) {
-    fun getStopsInfo(): List<StopInfo> = getStopOrNull()?.toArrayOrNull()?.map {
-        it.StopInfoOrNull()
-    }?.filterNotNull()?.toList() ?: emptyList()
+class StopExtractor(private val jsonNode: JsonNode) {
+    fun getStopsInfo(): List<Stop> = getStopOrNull()?.toArrayOrNull()?.mapNotNull {
+        it.stopInfoOrNull()
+    }?.toList() ?: emptyList()
 
-    fun getStopInfoOrNull(): StopInfo? = getStopOrNull()?.StopInfoOrNull()
+    fun getStopInfoOrNull(): Stop? = getStopOrNull()?.stopInfoOrNull()
 
     private fun getStopOrNull() = jsonNode.getPropertyOrNull("stops")?.getPropertyOrNull("Stop")
-    
-    private fun JsonNode.StopInfoOrNull(): StopInfo? {
-        return StopInfo(
-            codStop = getStringOrNull("codStop") ?: return null,
+
+    private fun JsonNode.stopInfoOrNull(): Stop? {
+        return Stop(
+            codStop = CodStop(getStringOrNull("codStop") ?: return null),
             name = getStringOrNull("name") ?: return null,
             latitude = getPropertyOrNull("coordinates")?.getPropertyOrNull("latitude")
                 ?.toDoubleOrNull()
@@ -29,7 +32,7 @@ class StopExtractor(val jsonNode: JsonNode) {
             longitude = getPropertyOrNull("coordinates")?.getPropertyOrNull("longitude")
                 ?.toDoubleOrNull()
                 ?: return null,
-            lines = getLinesOrNull()?.map { it.toStringOrNull() }?.requireNoNulls()?.toList()
+            lines = getLinesOrNull()?.mapNotNull { it.toStringOrNull() }?.map { CodLine(it) }?.toList()
                 ?: return null
         )
     }
