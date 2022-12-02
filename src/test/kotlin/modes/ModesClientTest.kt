@@ -11,10 +11,10 @@ class ModesClientTest {
     fun `should get modes`(): Unit = runBlocking {
         val client = CRMTClient(HttpClient.newHttpClient())
         val modes = client.modes.getModes()
-        modes shouldContain Mode(4, "METRO")
-        modes shouldContain Mode(8, "AUTOBUSES INTERURBANOS")
-        modes shouldContain Mode(5, "CERCANIAS")
-        modes shouldContain Mode(10, "METRO LIGERO/TRANVÍA")
-        modes shouldContain Mode(6, "AUTOBUSES EMT")
+        modes shouldContain Mode(CodMode(4), "METRO")
+        modes shouldContain Mode(CodMode(8), "AUTOBUSES INTERURBANOS")
+        modes shouldContain Mode(CodMode(5), "CERCANIAS")
+        modes shouldContain Mode(CodMode(10), "METRO LIGERO/TRANVÍA")
+        modes shouldContain Mode(CodMode(6), "AUTOBUSES EMT")
     }
 }

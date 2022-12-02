@@ -9,7 +9,7 @@ import getPropertyOrNull
 import getStringOrNull
 import java.net.http.HttpClient
 
-class ModesClient(val httpClient: HttpClient) {
+class ModesClient(private val httpClient: HttpClient) {
     suspend fun getModes(): Modes = httpClient.jsonRequest("$CRTM_URL/GetModes.php")
         .getPropertyOrNull("modes")
         ?.getArrayOrNull("Mode")
@@ -18,7 +18,7 @@ class ModesClient(val httpClient: HttpClient) {
 
     private fun JsonArray?.getModesOrNull(): Modes? = this?.map {
         Mode(
-            it.getStringOrNull("codMode")?.toIntOrNull() ?: return null,
+            CodMode(it.getStringOrNull("codMode")?.toIntOrNull() ?: return null),
             it.getStringOrNull("name") ?: return null
         )
     }
