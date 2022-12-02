@@ -22,11 +22,11 @@ class StopsClient(private val httpClient: HttpClient) {
         return extractor.getStopsInfo()
     }
 
-    suspend fun getStopsTime(codStop: CodStop): Stop {
+    suspend fun getStopsTime(codStop: CodStop): List<StopTime> {
         val json =
             httpClient.jsonRequest("$CRTM_URL/GetStopsTimes.php?codStop=${codStop.value.encode()}&type=1&orderBy=2&stopTimesByIti=3")
         val extractor = StopsTimesExtractor(json)
-        return extractor.getStopInfoOrNull() ?: throw CRTMException("Cant find stop info")
+        return extractor.getStopTimes()
     }
 
 }

@@ -3,13 +3,13 @@ package stops.extractors
 import JsonNode
 import extensions.inList
 import getArrayOrNull
+import getDoubleOrNull
 import getPropertyOrNull
 import getStringOrNull
 import lines.CodLine
 import stops.CodStop
 import stops.Stop
 import toArrayOrNull
-import toDoubleOrNull
 import toJson
 import toStringOrNull
 
@@ -26,14 +26,9 @@ class StopExtractor(private val jsonNode: JsonNode) {
         return Stop(
             codStop = CodStop(getStringOrNull("codStop") ?: return null),
             name = getStringOrNull("name") ?: return null,
-            latitude = getPropertyOrNull("coordinates")?.getPropertyOrNull("latitude")
-                ?.toDoubleOrNull()
-                ?: return null,
-            longitude = getPropertyOrNull("coordinates")?.getPropertyOrNull("longitude")
-                ?.toDoubleOrNull()
-                ?: return null,
-            lines = getLinesOrNull()?.mapNotNull { it.toStringOrNull() }?.map { CodLine(it) }?.toList()
-                ?: return null
+            latitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("latitude") ?: return null,
+            longitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("longitude") ?: return null,
+            lines = getLinesOrNull()?.mapNotNull { it.toStringOrNull() }?.map { CodLine(it) }?.toList() ?: return null
         )
     }
 

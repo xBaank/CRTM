@@ -33,12 +33,7 @@ class StopsClientTest {
     @Test
     fun `should get stops times by CodStop`(): Unit = runBlocking {
         val client = CRMTClient(HttpClient.newHttpClient())
-        val stop = client.stops.getStopsTime(CodStop("8_07904"))
-
-        stop.name shouldBeEqualTo "AV.UNIVERSIDAD-POLICÍA NACIONAL"
-        stop.codStop shouldBeEqualTo CodStop("8_07904")
-        stop.latitude shouldBeEqualTo 40.330936319115
-        stop.longitude shouldBeEqualTo -3.7655800899764
-        stop.lines shouldContain "8__450___"
+        val stops = client.stops.getStopsTime(CodStop("8_07904"))
+        stops.shouldNotBeEmpty()
     }
 }
