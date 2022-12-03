@@ -1,7 +1,8 @@
 package stops
 
-import CRMTClient
+import CRTMClient
 import kotlinx.coroutines.runBlocking
+import lines.CodLine
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeTrue
 import org.amshove.kluent.shouldContain
@@ -12,19 +13,19 @@ import java.net.http.HttpClient
 class StopsClientTest {
     @Test
     fun `should get stops by CodStop`(): Unit = runBlocking {
-        val client = CRMTClient(HttpClient.newHttpClient())
+        val client = CRTMClient(HttpClient.newHttpClient())
         val stop = client.stops.getStopInfoByCodStop(CodStop("8_07904"))
 
         stop.name shouldBeEqualTo "AV.UNIVERSIDAD-POLICÍA NACIONAL"
         stop.codStop shouldBeEqualTo CodStop("8_07904")
         stop.latitude shouldBeEqualTo 40.330936319115
         stop.longitude shouldBeEqualTo -3.7655800899764
-        stop.lines shouldContain "8__450___"
+        stop.lines shouldContain CodLine("8__450___")
     }
 
     @Test
     fun `should get stops by search`(): Unit = runBlocking {
-        val client = CRMTClient(HttpClient.newHttpClient())
+        val client = CRTMClient(HttpClient.newHttpClient())
         val stops = client.stops.getStopsBySearch("Universidad")
         stops.shouldNotBeEmpty()
         stops.any { it.name == "AV.UNIVERSIDAD-POLICÍA NACIONAL" }.shouldBeTrue()
@@ -32,8 +33,8 @@ class StopsClientTest {
 
     @Test
     fun `should get stops times by CodStop`(): Unit = runBlocking {
-        val client = CRMTClient(HttpClient.newHttpClient())
-        val stops = client.stops.getStopsTime(CodStop("8_07904"))
+        val client = CRTMClient(HttpClient.newHttpClient())
+        val stops = client.stops.getStopsTime(CodStop("8_08242"))
         stops.shouldNotBeEmpty()
     }
 }

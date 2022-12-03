@@ -10,9 +10,3 @@ data class Stop(
     val name: String
 )
 
-@JvmInline
-value class CodStop(val value: String) {
-    init {
-        require(value.split("_").all { it.toIntOrNull() != null }) { "Codigo invalido" }
-    }
-}

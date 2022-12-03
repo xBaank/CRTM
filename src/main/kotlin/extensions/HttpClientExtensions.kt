@@ -2,6 +2,7 @@ package extensions
 
 import JsonNode
 import JsonReader
+import exceptions.CRTMException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URL
@@ -18,5 +19,8 @@ suspend fun HttpClient.jsonRequest(url: String): JsonNode {
     val response = withContext(Dispatchers.IO) {
         send(request, HttpResponse.BodyHandlers.ofInputStream())
     }
-    return JsonReader.read(response.body())
+
+    if (response.statusCode() != 200) throw CRTMException("Error requesting $url, status code: ${response.statusCode()}")
+
+    return JsonReader.readOrNull(response.body()) ?: throw CRTMException("Error parsing json from $url")
 }

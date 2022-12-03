@@ -13,7 +13,7 @@ import toArrayOrNull
 import toJson
 import toStringOrNull
 
-class StopExtractor(private val jsonNode: JsonNode) {
+internal class StopExtractor(private val jsonNode: JsonNode) {
     fun getStopsInfo(): List<Stop> = getStopOrNull()?.toArrayOrNull()?.mapNotNull {
         it.stopInfoOrNull()
     }?.toList() ?: emptyList()
@@ -21,6 +21,7 @@ class StopExtractor(private val jsonNode: JsonNode) {
     fun getStopInfoOrNull(): Stop? = getStopOrNull()?.stopInfoOrNull()
 
     private fun getStopOrNull() = jsonNode.getPropertyOrNull("stops")?.getPropertyOrNull("Stop")
+        ?: jsonNode.getPropertyOrNull("stops")?.getPropertyOrNull("StopInformation")
 
     private fun JsonNode.stopInfoOrNull(): Stop? {
         return Stop(
@@ -34,6 +35,10 @@ class StopExtractor(private val jsonNode: JsonNode) {
 
     private fun JsonNode.getLinesOrNull() = getPropertyOrNull("codLines")
         ?.getArrayOrNull("Line")
+        ?: getPropertyOrNull("lines")
+            ?.getPropertyOrNull("Line")
+            ?.getPropertyOrNull("codLine")
+            ?.inList()
         ?: getStopOrNull()?.getPropertyOrNull("codLines")
             ?.getStringOrNull("Line")
             ?.toJson()
