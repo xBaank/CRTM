@@ -21,7 +21,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("com.github.xBaank:simpleJson:5.0.2")
     //junit 5
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
     //kluent
     testImplementation("org.amshove.kluent:kluent:1.72")
 }
