@@ -8,7 +8,7 @@ import getStringOrNull
 import modes.CodMode
 import modes.Mode
 
-class ModesExtractor(val json: JsonNode) {
+internal class ModesExtractor(val json: JsonNode) {
     fun getModes(): List<Mode> =
         json.getPropertyOrNull("modes")
             ?.getArrayOrNull("Mode")

@@ -10,7 +10,7 @@ import lines.*
 import modes.CodMode
 import stops.extractors.StopExtractor
 
-class LinesExtractor(val json: JsonNode) {
+internal class LinesExtractor(val json: JsonNode) {
     fun getLineInfoOrNull(): LineInfoItinerary? {
         val lineInfoJson = json.getPropertyOrNull("lines")?.getPropertyOrNull("LineInformation")
 
@@ -61,7 +61,7 @@ class LinesExtractor(val json: JsonNode) {
 
                 service = lineLocation.getStringOrNull("service") ?: return@mapNotNull null
             )
-            
+
         } ?: emptyList()
     }
 }
