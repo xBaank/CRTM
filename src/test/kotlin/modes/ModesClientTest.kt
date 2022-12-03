@@ -5,12 +5,11 @@ import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldNotBeEmpty
 import org.junit.jupiter.api.Test
-import java.net.http.HttpClient
 
 class ModesClientTest {
     @Test
     fun `should get modes`(): Unit = runBlocking {
-        val client = CRTMClient(HttpClient.newHttpClient())
+        val client = CRTMClient()
 
         val modes = client.modes.getModes()
 

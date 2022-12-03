@@ -4,11 +4,11 @@ import CRTM_URL
 import exceptions.CRTMException
 import extensions.encode
 import extensions.jsonRequest
+import okhttp3.OkHttpClient
 import stops.extractors.StopExtractor
 import stops.extractors.StopsTimesExtractor
-import java.net.http.HttpClient
 
-class StopsClient(private val httpClient: HttpClient) {
+class StopsClient(private val httpClient: OkHttpClient) {
 
     suspend fun getStopInfoByCodStop(codStop: CodStop): Stop {
         val json = httpClient.jsonRequest("$CRTM_URL/GetStops.php?codStop=${codStop.value.encode()}")

@@ -8,9 +8,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import lines.extractors.LinesExtractor
-import java.net.http.HttpClient
+import okhttp3.OkHttpClient
 
-class LinesClient(private val httpClient: HttpClient) {
+class LinesClient(private val httpClient: OkHttpClient) {
     suspend fun getLineInfoByCodLine(codLine: CodLine): LineInfoItinerary {
         val json =
             httpClient.jsonRequest("$CRTM_URL/GetLinesInformation.php?activeItinerary=1&codLine=${codLine.value.encode()}")

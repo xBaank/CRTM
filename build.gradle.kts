@@ -14,6 +14,8 @@ repositories {
 }
 
 dependencies {
+    //okHttp
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("com.github.xBaank:simpleJson:5.0.2")

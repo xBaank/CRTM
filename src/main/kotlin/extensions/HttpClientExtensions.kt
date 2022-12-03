@@ -5,22 +5,21 @@ import JsonReader
 import exceptions.CRTMException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.net.URL
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
-suspend fun HttpClient.jsonRequest(url: String): JsonNode {
-    val request = HttpRequest.newBuilder()
-        .uri(URL(url).toURI())
-        .GET()
+suspend fun OkHttpClient.jsonRequest(url: String): JsonNode {
+    val request = Request.Builder()
+        .url(url)
+        .get()
         .build()
 
-    val response = withContext(Dispatchers.IO) {
-        send(request, HttpResponse.BodyHandlers.ofInputStream())
+    withContext(Dispatchers.IO) {
+        newCall(request).execute()
+    }.use {
+        if (it.code != 200) throw CRTMException("Error requesting $url, status code: ${it.code}")
+
+        return JsonReader.readOrNull(it.body?.byteStream() ?: throw CRTMException("Empty body from $url"))
+            ?: throw CRTMException("Error parsing json from $url")
     }
-
-    if (response.statusCode() != 200) throw CRTMException("Error requesting $url, status code: ${response.statusCode()}")
-
-    return JsonReader.readOrNull(response.body()) ?: throw CRTMException("Error parsing json from $url")
 }
