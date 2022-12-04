@@ -17,8 +17,8 @@ class StopsClientTest {
 
         stop.name shouldBeEqualTo "AV.UNIVERSIDAD-POLICÍA NACIONAL"
         stop.codStop shouldBeEqualTo CodStop("8_07904")
-        stop.latitude shouldBeEqualTo 40.330936319115
-        stop.longitude shouldBeEqualTo -3.7655800899764
+        stop.coordinates.latitude shouldBeEqualTo 40.330936319115
+        stop.coordinates.longitude shouldBeEqualTo -3.7655800899764
         stop.lines shouldContain CodLine("8__450___")
     }
 

@@ -1,10 +1,10 @@
 package stops
 
 import lines.CodLine
+import lines.Coordinates
 
 data class Stop(
-    val latitude: Double,
-    val longitude: Double,
+    val coordinates: Coordinates,
     val lines: List<CodLine>,
     val codStop: CodStop,
     val name: String

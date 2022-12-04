@@ -21,7 +21,7 @@ class LinesClientTest {
     fun `get line location by CodLine should return LineLocation`(): Unit = runBlocking {
         val client = CRTMClient()
         val linesLocations = client.lines.getLineLocationByCodLine(CodLine("8__450___"))
-        linesLocations shouldHaveSize 4
+        linesLocations.shouldNotBeEmpty()
         linesLocations.firstOrNull()?.codLine shouldBeEqualTo CodLine("8__450___")
     }
 }
