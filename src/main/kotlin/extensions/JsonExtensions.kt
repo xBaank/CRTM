@@ -2,4 +2,4 @@ package extensions
 
 import JsonNode
 
-fun JsonNode.inList() = listOf(this)
+internal fun JsonNode.inList() = listOf(this)

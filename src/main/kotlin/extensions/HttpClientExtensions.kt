@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
-suspend fun OkHttpClient.jsonRequest(url: String): JsonNode {
+internal suspend fun OkHttpClient.jsonRequest(url: String): JsonNode {
     val request = Request.Builder()
         .url(url)
         .get()

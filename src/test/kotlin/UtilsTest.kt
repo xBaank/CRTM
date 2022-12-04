@@ -1,3 +1,4 @@
+import lines.CodLine
 import modes.CodMode
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -13,6 +14,6 @@ class UtilsTest {
 
     @Test
     fun `should create lineCode`() {
-        createLineCode(CodMode(4), "450") shouldBeEqualTo "4__450___"
+        createLineCode(CodMode(4), "450") shouldBeEqualTo CodLine("4__450___")
     }
 }
