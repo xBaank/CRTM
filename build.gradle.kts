@@ -15,11 +15,13 @@ repositories {
 }
 
 dependencies {
+    //arrow kt
+    implementation("io.arrow-kt:arrow-core:1.1.3")
     //okHttp
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("com.github.xBaank:simpleJson:5.0.2")
+    implementation("com.github.xBaank:simpleJson:6.0.0")
     //junit 5
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
     //kluent
