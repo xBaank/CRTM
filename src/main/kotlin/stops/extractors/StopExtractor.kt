@@ -7,7 +7,7 @@ import getDoubleOrNull
 import getPropertyOrNull
 import getStringOrNull
 import lines.CodLine
-import lines.Coordinates
+import lines.Coordinate
 import stops.CodStop
 import stops.Stop
 import toArrayOrNull
@@ -28,7 +28,7 @@ internal class StopExtractor(private val jsonNode: JsonNode) {
         return Stop(
             codStop = CodStop(getStringOrNull("codStop") ?: return null),
             name = getStringOrNull("name") ?: return null,
-            coordinates = Coordinates(
+            coordinates = Coordinate(
                 latitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("latitude") ?: return null,
                 longitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("longitude") ?: return null,
             ),
