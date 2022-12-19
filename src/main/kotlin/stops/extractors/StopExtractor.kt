@@ -7,7 +7,7 @@ import getDoubleOrNull
 import getPropertyOrNull
 import getStringOrNull
 import lines.CodLine
-import lines.Coordinates
+import lines.Coordinate
 import stops.CodStop
 import stops.Stop
 import toArrayOrNull
@@ -28,21 +28,33 @@ internal class StopExtractor(private val jsonNode: JsonNode) {
         return Stop(
             codStop = CodStop(getStringOrNull("codStop") ?: return null),
             name = getStringOrNull("name") ?: return null,
-            coordinates = Coordinates(
+            coordinates = Coordinate(
                 latitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("latitude") ?: return null,
                 longitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("longitude") ?: return null,
             ),
-            lines = getLinesOrNull()?.mapNotNull { it.toStringOrNull() }?.map { CodLine(it) }?.toList() ?: return null
+            lines = getLinesOrNull()?.mapNotNull { it.toStringOrNull() }?.map { CodLine(it) }?.toList() ?: emptyList()
         )
     }
 
-    private fun JsonNode.getLinesOrNull() = getPropertyOrNull("codLines")
-        ?.getArrayOrNull("Line")
-        ?: getPropertyOrNull("lines")
+    //TODO improve
+    //Something weird is that it Line can come a an object and as an array
+    private fun JsonNode.getLinesOrNull() =
+        getPropertyOrNull("codLines")
+            ?.getArrayOrNull("Line")
+        ?:
+        getPropertyOrNull("lines")
+            ?.getArrayOrNull("Line")
+            ?.mapNotNull {
+                it.getPropertyOrNull("codLine")
+            }
+        ?:
+        getPropertyOrNull("lines")
             ?.getPropertyOrNull("Line")
             ?.getPropertyOrNull("codLine")
             ?.inList()
-        ?: getStopOrNull()?.getPropertyOrNull("codLines")
+        ?:
+        getStopOrNull()
+            ?.getPropertyOrNull("codLines")
             ?.getStringOrNull("Line")
             ?.toJson()
             ?.inList()

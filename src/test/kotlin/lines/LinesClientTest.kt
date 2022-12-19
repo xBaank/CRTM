@@ -1,6 +1,8 @@
 package lines
 
 import CRTMClient
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
@@ -20,7 +22,7 @@ class LinesClientTest {
     @Test
     fun `get line location by CodLine should return LineLocation`(): Unit = runBlocking {
         val client = CRTMClient()
-        val linesLocations = client.lines.getLineLocationByCodLine(CodLine("8__450___"))
+        val linesLocations = client.lines.getLineLocationByCodLine(CodLine("8__450___")).take(4).toList()
         linesLocations.shouldNotBeEmpty()
         linesLocations.firstOrNull()?.codLine shouldBeEqualTo CodLine("8__450___")
     }

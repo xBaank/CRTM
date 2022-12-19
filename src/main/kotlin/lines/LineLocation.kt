@@ -7,14 +7,14 @@ data class LineLocation(
     val codLine: CodLine,
     val codMode: CodMode,
     val direction: Int,
-    val coordinates: Coordinates,
+    val coordinates: Coordinate,
     val service: String,
 )
 
 @JvmInline
 value class CodVehicle(val value: String)
 
-data class Coordinates(
+data class Coordinate(
     val latitude: Double,
     val longitude: Double
 )

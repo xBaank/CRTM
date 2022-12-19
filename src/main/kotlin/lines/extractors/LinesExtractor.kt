@@ -54,7 +54,7 @@ internal class LinesExtractor(val json: JsonNode) {
                 direction = lineLocation.getIntOrNull("direction")
                     ?: return@mapNotNull null,
 
-                coordinates = Coordinates(
+                coordinates = Coordinate(
                     latitude = coordinates?.getDoubleOrNull("latitude") ?: return@mapNotNull null,
                     longitude = coordinates.getDoubleOrNull("longitude") ?: return@mapNotNull null
                 ),
