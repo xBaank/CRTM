@@ -4,8 +4,8 @@ import okhttp3.OkHttpClient
 import stops.StopsClient
 import java.util.concurrent.TimeUnit
 
-const val CRTM_URL = "https://www.crtm.es/widgets/api"
-val defaultHttpClient = OkHttpClient.Builder()
+internal const val CRTM_URL = "https://www.crtm.es/widgets/api"
+internal val defaultHttpClient = OkHttpClient.Builder()
     .readTimeout(30, TimeUnit.SECONDS)
     .build()
 

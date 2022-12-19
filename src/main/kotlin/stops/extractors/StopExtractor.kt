@@ -15,35 +15,44 @@ import toJson
 import toStringOrNull
 
 internal class StopExtractor(private val jsonNode: JsonNode) {
-    fun getStopsInfo(): List<Stop> = getStopOrNull()?.toArrayOrNull()?.mapNotNull {
-        it.stopInfoOrNull()
-    }?.toList() ?: emptyList()
+    fun getStopsInfo(): List<Stop> = getStopOrNull()
+        ?.toArrayOrNull()
+        ?.mapNotNull(::stopInfoOrNull)
+        ?.toList()
+        ?:
+        emptyList()
 
-    fun getStopInfoOrNull(): Stop? = getStopOrNull()?.stopInfoOrNull()
+    fun getStopInfoOrNull(): Stop? = getStopOrNull()
+        ?.let(::stopInfoOrNull)
 
-    private fun getStopOrNull() = jsonNode.getPropertyOrNull("stops")?.getPropertyOrNull("Stop")
-        ?: jsonNode.getPropertyOrNull("stops")?.getPropertyOrNull("StopInformation")
+    private fun getStopOrNull() = jsonNode.getPropertyOrNull("stops")
+        ?.getPropertyOrNull("Stop")
+        ?:
+        jsonNode.getPropertyOrNull("stops")
+        ?.getPropertyOrNull("StopInformation")
 
-    private fun JsonNode.stopInfoOrNull(): Stop? {
+    private fun stopInfoOrNull(node : JsonNode): Stop? {
         return Stop(
-            codStop = CodStop(getStringOrNull("codStop") ?: return null),
-            name = getStringOrNull("name") ?: return null,
+            codStop = CodStop(node.getStringOrNull("codStop") ?: return null),
+            name = node.getStringOrNull("name") ?: return null,
             coordinates = Coordinate(
-                latitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("latitude") ?: return null,
-                longitude = getPropertyOrNull("coordinates")?.getDoubleOrNull("longitude") ?: return null,
+                latitude = node.getPropertyOrNull("coordinates")?.getDoubleOrNull("latitude") ?: return null,
+                longitude = node.getPropertyOrNull("coordinates")?.getDoubleOrNull("longitude") ?: return null,
             ),
-            lines = getLinesOrNull()?.mapNotNull { it.toStringOrNull() }?.map { CodLine(it) }?.toList() ?: return null
+            lines = node.let(::getLinesOrNull)?.mapNotNull { it.toStringOrNull() }?.map { CodLine(it) }?.toList() ?: return null
         )
     }
 
-    private fun JsonNode.getLinesOrNull() = getPropertyOrNull("codLines")
+    private fun getLinesOrNull(node : JsonNode) = node.getPropertyOrNull("codLines")
         ?.getArrayOrNull("Line")
-        ?: getPropertyOrNull("lines")
-            ?.getPropertyOrNull("Line")
-            ?.getPropertyOrNull("codLine")
-            ?.inList()
-        ?: getStopOrNull()?.getPropertyOrNull("codLines")
-            ?.getStringOrNull("Line")
-            ?.toJson()
-            ?.inList()
+        ?:
+        node.getPropertyOrNull("lines")
+        ?.getPropertyOrNull("Line")
+        ?.getPropertyOrNull("codLine")
+        ?.inList()
+        ?:
+        node.getPropertyOrNull("codLines")
+        ?.getStringOrNull("Line")
+        ?.toJson()
+        ?.inList()
 }

@@ -2,7 +2,7 @@ package utils
 
 import lines.Coordinate
 
-object PolylineUtil {
+internal object PolylineUtil {
     /**
      * Encodes a polyline using Google's polyline algorithm
      * (See http://code.google.com/apis/maps/documentation/polylinealgorithm.html for more information).
