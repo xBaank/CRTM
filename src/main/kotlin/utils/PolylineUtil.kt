@@ -73,7 +73,7 @@ internal object PolylineUtil {
 
         for (char in polyline.toCharArray()) {
             // convert each character to decimal from ascii
-            var value = char.toInt() - 63
+            var value = char.code - 63
 
             // values that have a chunk following have an extra 1 on the left
             val isLastOfChunk = (value and 0x20) == 0

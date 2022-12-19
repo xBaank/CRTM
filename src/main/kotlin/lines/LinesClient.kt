@@ -1,6 +1,7 @@
 package lines
 
 import CRTM_URL
+import arrow.core.getOrHandle
 import exceptions.CRTMException
 import extensions.jsonRequest
 import extensions.toParam
@@ -15,7 +16,7 @@ class LinesClient(private val httpClient: OkHttpClient) {
 
     suspend fun getLineInfoByCodLine(codLine: CodLine): LineInfoItinerary {
         val json =
-            httpClient.jsonRequest("$CRTM_URL/GetLinesInformation.php?activeItinerary=1&codLine=${codLine.value.toParam()}")
+            httpClient.jsonRequest("$CRTM_URL/GetLinesInformation.php?activeItinerary=1&codLine=${codLine.value.toParam()}").getOrHandle { throw it }
         val extractor = LinesExtractor(json)
         return extractor.getLineInfoOrNull() ?: throw CRTMException("Line not found")
     }
@@ -29,6 +30,7 @@ class LinesClient(private val httpClient: OkHttpClient) {
             val codMode = lineInfo.codMode
             val json =
                 httpClient.jsonRequest("$CRTM_URL/GetLineLocation.php?mode=${codMode.value.toParam()}&codItinerary=${codItinerary.value.toParam()}&codLine=${codLine.value.toParam()}&codStop=${codStop.value.toParam()}&direction=${direction.toParam()}")
+                    .getOrHandle { throw it }
             val extractor = LinesExtractor(json)
             extractor.getLineLocations().forEach { emit(it) }
         }

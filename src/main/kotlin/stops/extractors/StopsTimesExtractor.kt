@@ -1,6 +1,12 @@
 package stops.extractors
 
 import JsonNode
+import arrow.core.Either
+import arrow.core.continuations.either
+import arrow.core.left
+import arrow.core.leftIfNull
+import arrow.core.right
+import exceptions.CRTMException
 import getArrayOrNull
 import getIntOrNull
 import getPropertyOrNull
@@ -16,25 +22,27 @@ import java.time.format.DateTimeFormatter
 internal class StopsTimesExtractor(json: JsonNode) {
     val stopTimesJson = json.getPropertyOrNull("stopTimes")
 
-    fun getStopTimes(): List<StopTime> = stopTimesJson
-        ?.getPropertyOrNull("times")
-        ?.getArrayOrNull("Time")
-        ?.mapNotNull(::getStopTimeOrNull)
-        ?.toList()
-        ?: emptyList()
+    suspend fun getStopTimes(): Either<CRTMException, List<StopTime>> = either {
+        stopTimesJson
+            ?.getPropertyOrNull("times")
+            ?.getArrayOrNull("Time")
+            ?.map(::getStopTime)
+            ?.map { it.bind() }
+            ?.toList()
+    }.leftIfNull { CRTMException("Error parsing stop times") }
 
-    private fun getStopTimeOrNull(node: JsonNode): StopTime? {
-        val line = node.getPropertyOrNull("line") ?: return null
+    private fun getStopTime(node: JsonNode): Either<CRTMException, StopTime> {
+        val line = node.getPropertyOrNull("line") ?: return CRTMException("Line not found").left()
         return StopTime(
-            codStop = CodStop(stopTimesJson?.getPropertyOrNull("stop")?.getStringOrNull("codStop") ?: return null),
+            codStop = CodStop(stopTimesJson?.getPropertyOrNull("stop")?.getStringOrNull("codStop") ?: return CRTMException("Error parsing stop code").left()),
             line = LineInfo(
-                CodLine(line.getStringOrNull("codLine") ?: return null),
-                line.getStringOrNull("description") ?: return null,
-                CodMode(line.getStringOrNull("codMode")?.toIntOrNull() ?: return null)
+                CodLine(line.getStringOrNull("codLine") ?: return CRTMException("Error parsing line code").left()),
+                line.getStringOrNull("description") ?: return CRTMException("Error parsing line description").left(),
+                CodMode(line.getStringOrNull("codMode")?.toIntOrNull() ?: return CRTMException("Error parsing line mode").left())
             ),
-            time = node.getStringOrNull("time")?.let(::getLocalDateTimeOrNull) ?: return null,
-            direction = node.getIntOrNull("direction") ?: return null
-        )
+            time = node.getStringOrNull("time")?.let(::getLocalDateTimeOrNull) ?: return CRTMException("Error parsing time").left(),
+            direction = node.getIntOrNull("direction") ?: return CRTMException("Error parsing direction").left()
+        ).right()
     }
 
     private fun getLocalDateTimeOrNull(value: String): LocalDateTime? =

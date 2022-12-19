@@ -33,7 +33,7 @@ class StopsClientTest {
     @Test
     fun `should get stops times by CodStop`(): Unit = runBlocking {
         val client = CRTMClient()
-        val stops = client.stops.getStopsTime(CodStop("8_08242"))
+        val stops = client.stops.getStopsTime(CodStop("8_083242"))
         stops.shouldNotBeEmpty()
     }
 }
