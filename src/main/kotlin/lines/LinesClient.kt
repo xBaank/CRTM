@@ -18,7 +18,7 @@ class LinesClient(private val httpClient: OkHttpClient) {
         val json =
             httpClient.jsonRequest("$CRTM_URL/GetLinesInformation.php?activeItinerary=1&codLine=${codLine.value.toParam()}").getOrHandle { throw it }
         val extractor = LinesExtractor(json)
-        return extractor.getLineInfoOrNull() ?: throw CRTMException("Line not found")
+        return extractor.getLineInfo().getOrHandle { throw it }
     }
 
     suspend fun getLineLocationByCodLine(codLine: CodLine): Flow<LineLocation> = flow {
@@ -32,7 +32,7 @@ class LinesClient(private val httpClient: OkHttpClient) {
                 httpClient.jsonRequest("$CRTM_URL/GetLineLocation.php?mode=${codMode.value.toParam()}&codItinerary=${codItinerary.value.toParam()}&codLine=${codLine.value.toParam()}&codStop=${codStop.value.toParam()}&direction=${direction.toParam()}")
                     .getOrHandle { throw it }
             val extractor = LinesExtractor(json)
-            extractor.getLineLocations().forEach { emit(it) }
+            extractor.getLineLocations().getOrHandle { throw it }.forEach { emit(it) }
         }
     }.flowOn(Dispatchers.IO)
 }

@@ -4,8 +4,8 @@ import JsonNode
 import arrow.core.Either
 import arrow.core.continuations.either
 import arrow.core.left
-import arrow.core.leftIfNull
 import arrow.core.right
+import arrow.core.rightIfNotNull
 import exceptions.CRTMException
 import getArrayOrNull
 import getIntOrNull
@@ -23,13 +23,16 @@ internal class StopsTimesExtractor(json: JsonNode) {
     val stopTimesJson = json.getPropertyOrNull("stopTimes")
 
     suspend fun getStopTimes(): Either<CRTMException, List<StopTime>> = either {
-        stopTimesJson
-            ?.getPropertyOrNull("times")
-            ?.getArrayOrNull("Time")
-            ?.map(::getStopTime)
-            ?.map { it.bind() }
-            ?.toList()
-    }.leftIfNull { CRTMException("Error parsing stop times") }
+        stopTimesJson?.getPropertyOrNull("times")
+            .rightIfNotNull { CRTMException("Cant find stop times") }
+            .bind()
+            .getArrayOrNull("Time")
+            .rightIfNotNull { CRTMException("Cant find stop Time") }
+            .bind()
+            .map(::getStopTime)
+            .map { it.bind() }
+            .toList()
+    }
 
     private fun getStopTime(node: JsonNode): Either<CRTMException, StopTime> {
         val line = node.getPropertyOrNull("line") ?: return CRTMException("Line not found").left()

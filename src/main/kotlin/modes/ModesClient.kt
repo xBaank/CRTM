@@ -10,7 +10,7 @@ class ModesClient(private val httpClient: OkHttpClient) {
     suspend fun getModes(): Modes {
         val json = httpClient.jsonRequest("$CRTM_URL/GetModes.php").getOrHandle { throw it }
         val extractor = ModesExtractor(json)
-        return extractor.getModes()
+        return extractor.getModes().getOrHandle { throw it }
     }
 
 }

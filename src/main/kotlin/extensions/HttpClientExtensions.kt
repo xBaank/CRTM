@@ -18,15 +18,14 @@ internal suspend fun OkHttpClient.jsonRequest(url: String): Either<CRTMException
         .get()
         .build()
 
-    return withContext(Dispatchers.IO) { newCall(request).execute() }
-        .use { processResponse(it, url) }
+    return withContext(Dispatchers.IO) { newCall(request).execute() }.use(::processResponse)
 }
 
-private fun processResponse(it: Response, url: String): Either<CRTMException, JsonNode> {
+private fun processResponse(it: Response): Either<CRTMException, JsonNode> {
     return when {
-        it.code != 200 -> CRTMException("Error requesting $url, status code: ${it.code}").left()
+        it.code != 200 -> CRTMException("Error requesting ${it.request.url}, status code: ${it.code}").left()
         else -> JsonReader
-            .readOrNull(it.body?.byteStream() ?: return CRTMException("Empty body from $url").left())
-            .rightIfNotNull { CRTMException("Error parsing $url") }
+            .readOrNull(it.body?.byteStream() ?: return CRTMException("Empty body from ${it.request.url}").left())
+            .rightIfNotNull { CRTMException("Error parsing ${it.request.url}") }
     }
 }
