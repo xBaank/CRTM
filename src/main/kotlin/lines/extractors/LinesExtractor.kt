@@ -20,7 +20,7 @@ internal class LinesExtractor(val json: JsonNode) {
         val lineInfoJson = json.getPropertyOrNull("lines")?.getPropertyOrNull("LineInformation") ?: return CRTMException("Error parsing line info").left()
 
         val lineInfo = LineInfo(
-            codLine = lineInfoJson.getStringOrNull("codLine")?.let { CodLine(it) } ?: return CRTMException("Error parsing line code").left(),
+            codLine = lineInfoJson.getStringOrNull("codLine")?.let(::CodLine) ?: return CRTMException("Error parsing line code").left(),
             description = lineInfoJson.getStringOrNull("description") ?: return CRTMException("Error parsing line description").left(),
             codMode = lineInfoJson.getStringOrNull("codMode")?.toIntOrNull()?.let { CodMode(it) } ?: return CRTMException("Error parsing line mode").left()
         )

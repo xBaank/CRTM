@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 
 internal const val CRTM_URL = "https://www.crtm.es/widgets/api"
 internal val defaultHttpClient = OkHttpClient.Builder()
-    .readTimeout(30, TimeUnit.SECONDS)
+    .readTimeout(0, TimeUnit.SECONDS)
     .build()
 
 class CRTMClient(httpClient: OkHttpClient = defaultHttpClient) {

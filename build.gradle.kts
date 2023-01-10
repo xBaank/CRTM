@@ -1,4 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+val jaxws by configurations.creating
+repositories {
+    mavenCentral()
+    maven("https://jitpack.io"
+}
+
+group = "org.bank"
+version = "0.2.0"
 
 plugins {
     kotlin("jvm") version "1.7.21"
@@ -6,15 +14,24 @@ plugins {
     application
 }
 
-group = "org.bank"
-version = "0.2.0"
-
-repositories {
-    mavenCentral()
-    maven("https://jitpack.io")
-}
-
 dependencies {
+    jaxws("com.sun.xml.ws:jaxws-tools:2.1.4")
+    jaxws("com.sun.xml.ws:jaxws-rt:2.1.4")
+
+    jaxws("com.sun.xml.ws:runtime:2.3.2")
+    jaxws("javax.xml.ws:jaxws-api:2.3.1")
+
+    implementation("com.sun.xml.ws:jaxws-tools:2.1.4")
+    implementation("com.sun.xml.ws:jaxws-rt:2.1.4")
+
+    implementation("com.sun.xml.ws:runtime:2.3.2")
+    implementation("javax.xml.ws:jaxws-api:2.3.1")
+
+
+
+    //
+
+
     //arrow kt
     implementation("io.arrow-kt:arrow-core:1.1.3")
     //okHttp
@@ -27,6 +44,7 @@ dependencies {
     //kluent
     testImplementation("org.amshove.kluent:kluent:1.72")
 }
+
 
 //publish
 publishing {
@@ -43,6 +61,33 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+task("wsimport-myservice") {
+    group = BasePlugin.BUILD_GROUP
+    val destDir = file("$projectDir/src/main/java")
+    destDir.mkdirs()
+    val sourcedestdir = file("$projectDir/src/main/java")
+    sourcedestdir.mkdirs()
+    doLast {
+        ant.withGroovyBuilder {
+            "taskdef"(
+                "name" to "wsimport",
+                "classname" to "com.sun.tools.ws.ant.WsImport",
+                "classpath" to jaxws.asPath
+            )
+
+            "wsimport"(
+                "keep" to true,
+                "sourcedestdir" to sourcedestdir,
+                "destDir" to destDir,
+                "package" to "crtm.soap",
+                "wsdl" to "http://www.citram.es:8080/WSMultimodalInformation/MultimodalInformation.svc?wsdl",
+            ) {
+                "xjcarg"("value" to "-XautoNameResolution")
+            }
+        }
+    }
 }
 
 application {
