@@ -1,12 +1,12 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -14,26 +14,26 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="Alert">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="codMode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="informedEntities" type="{GEIS.MultimodalInfoWebService}ArrayOfEntitySelector" minOccurs="0"/>
- *         &lt;element name="startDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="endDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="expeditionType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="cause" type="{GEIS.MultimodalInfoWebService}AlertCause"/>
- *         &lt;element name="effect" type="{GEIS.MultimodalInfoWebService}AlertEffect"/>
- *         &lt;element name="titleLang" type="{GEIS.MultimodalInfoWebService}ArrayOfStringLanguage" minOccurs="0"/>
- *         &lt;element name="descriptionLang" type="{GEIS.MultimodalInfoWebService}ArrayOfStringLanguage" minOccurs="0"/>
- *         &lt;element name="urlLang" type="{GEIS.MultimodalInfoWebService}ArrayOfStringLanguage" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="Alert">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="codMode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="informedEntities" type="{GEIS.MultimodalInfoWebService}ArrayOfEntitySelector" minOccurs="0"/>
+ *         <element name="startDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="endDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="expeditionType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="cause" type="{GEIS.MultimodalInfoWebService}AlertCause"/>
+ *         <element name="effect" type="{GEIS.MultimodalInfoWebService}AlertEffect"/>
+ *         <element name="titleLang" type="{GEIS.MultimodalInfoWebService}ArrayOfStringLanguage" minOccurs="0"/>
+ *         <element name="descriptionLang" type="{GEIS.MultimodalInfoWebService}ArrayOfStringLanguage" minOccurs="0"/>
+ *         <element name="urlLang" type="{GEIS.MultimodalInfoWebService}ArrayOfStringLanguage" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -62,8 +62,10 @@ public class Alert {
     protected XMLGregorianCalendar endDate;
     protected String expeditionType;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected AlertCause cause;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected AlertEffect effect;
     protected ArrayOfStringLanguage titleLang;
     protected ArrayOfStringLanguage descriptionLang;

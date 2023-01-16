@@ -1,27 +1,26 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for TipoExpedicion.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="TipoExpedicion">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="CAMBIO_DE_LINEA"/>
- *     &lt;enumeration value="ENCIERRO"/>
- *     &lt;enumeration value="EN_SERVICIO"/>
- *     &lt;enumeration value="REFUERZO"/>
- *     &lt;enumeration value="SALIDA"/>
- *     &lt;enumeration value="EN_VACIO"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
+ * <pre>{@code
+ * <simpleType name="TipoExpedicion">
+ *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     <enumeration value="CAMBIO_DE_LINEA"/>
+ *     <enumeration value="ENCIERRO"/>
+ *     <enumeration value="EN_SERVICIO"/>
+ *     <enumeration value="REFUERZO"/>
+ *     <enumeration value="SALIDA"/>
+ *     <enumeration value="EN_VACIO"/>
+ *   </restriction>
+ * </simpleType>
+ * }</pre>
  * 
  */
 @XmlType(name = "TipoExpedicion")

@@ -1,8 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 val jaxws by configurations.creating
+
 repositories {
     mavenCentral()
-    maven("https://jitpack.io"
+    maven("https://jitpack.io")
 }
 
 group = "org.bank"
@@ -11,25 +13,21 @@ version = "0.2.0"
 plugins {
     kotlin("jvm") version "1.7.21"
     `maven-publish`
-    application
+   // application
 }
 
 dependencies {
-    jaxws("com.sun.xml.ws:jaxws-tools:2.1.4")
-    jaxws("com.sun.xml.ws:jaxws-rt:2.1.4")
+    jaxws("com.sun.xml.ws:jaxws-tools:4.0.0")
+    //jaxws("com.sun.xml.ws:jaxws-rt:2.1.4")
 
-    jaxws("com.sun.xml.ws:runtime:2.3.2")
-    jaxws("javax.xml.ws:jaxws-api:2.3.1")
+    //jaxws("com.sun.xml.ws:runtime:2.3.2")
+    //jaxws("javax.xml.ws:jaxws-api:2.3.1")
 
-    implementation("com.sun.xml.ws:jaxws-tools:2.1.4")
-    implementation("com.sun.xml.ws:jaxws-rt:2.1.4")
+    implementation("com.sun.xml.ws:jaxws-tools:4.0.0")
+    //implementation("com.sun.xml.ws:jaxws-rt:2.1.4")
 
-    implementation("com.sun.xml.ws:runtime:2.3.2")
-    implementation("javax.xml.ws:jaxws-api:2.3.1")
-
-
-
-    //
+    //implementation("com.sun.xml.ws:runtime:2.3.2")
+    //implementation("javax.xml.ws:jaxws-api:2.3.1")
 
 
     //arrow kt
@@ -43,6 +41,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
     //kluent
     testImplementation("org.amshove.kluent:kluent:1.72")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 
@@ -63,12 +62,17 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+tasks.withType<JavaCompile> {
+    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+    targetCompatibility = JavaVersion.VERSION_1_8.toString()
+}
+
 task("wsimport-myservice") {
     group = BasePlugin.BUILD_GROUP
     val destDir = file("$projectDir/src/main/java")
     destDir.mkdirs()
-    val sourcedestdir = file("$projectDir/src/main/java")
-    sourcedestdir.mkdirs()
+    val sourceDestDir = file("$projectDir/src/main/java")
+    sourceDestDir.mkdirs()
     doLast {
         ant.withGroovyBuilder {
             "taskdef"(
@@ -79,8 +83,8 @@ task("wsimport-myservice") {
 
             "wsimport"(
                 "keep" to true,
-                "sourcedestdir" to sourcedestdir,
-                "destDir" to destDir,
+                "sourcedestdir" to sourceDestDir,
+                //"destDir" to destDir, alreaddy compiled java classes, not needed
                 "package" to "crtm.soap",
                 "wsdl" to "http://www.citram.es:8080/WSMultimodalInformation/MultimodalInformation.svc?wsdl",
             ) {
@@ -89,7 +93,11 @@ task("wsimport-myservice") {
         }
     }
 }
-
-application {
-    mainClass.set("MainKt")
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }

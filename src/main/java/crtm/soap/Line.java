@@ -1,12 +1,12 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -14,29 +14,29 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="Line">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="codLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="shortDescription" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="codMode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="updateDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="updateKmlDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="nightService" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="active" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="shortItinerary" type="{GEIS.MultimodalInfoWebService}ArrayOfItinerary" minOccurs="0"/>
- *         &lt;element name="URLLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="colorLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="text_colorLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="companyCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="Line">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="codLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="shortDescription" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="codMode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="updateDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="updateKmlDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="nightService" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="active" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         <element name="shortItinerary" type="{GEIS.MultimodalInfoWebService}ArrayOfItinerary" minOccurs="0"/>
+ *         <element name="URLLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="colorLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="text_colorLine" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="companyCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */

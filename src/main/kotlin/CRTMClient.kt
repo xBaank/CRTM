@@ -9,6 +9,7 @@ internal val defaultHttpClient = OkHttpClient.Builder()
     .readTimeout(0, TimeUnit.SECONDS)
     .build()
 
+val privateKey = "pruebapruebapruebapruebaprueba12".toByteArray()
 class CRTMClient(httpClient: OkHttpClient = defaultHttpClient) {
     val stops = StopsClient(httpClient)
     val modes = ModesClient(httpClient)

@@ -1,12 +1,12 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -14,23 +14,23 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="Actividad">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="hora" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="codEstacion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="nombreEstacion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="segundosAnt" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="segundosPost" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="tipo_actividad" type="{GEIS.MultimodalInfoWebService}TipoActividad"/>
- *         &lt;element name="tipo_estacion" type="{GEIS.MultimodalInfoWebService}TipoEstacion"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="Actividad">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="hora" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="codEstacion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="nombreEstacion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="segundosAnt" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="segundosPost" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="tipo_actividad" type="{GEIS.MultimodalInfoWebService}TipoActividad"/>
+ *         <element name="tipo_estacion" type="{GEIS.MultimodalInfoWebService}TipoEstacion"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -54,8 +54,10 @@ public class Actividad {
     protected int segundosAnt;
     protected int segundosPost;
     @XmlElement(name = "tipo_actividad", required = true)
+    @XmlSchemaType(name = "string")
     protected TipoActividad tipoActividad;
     @XmlElement(name = "tipo_estacion", required = true)
+    @XmlSchemaType(name = "string")
     protected TipoEstacion tipoEstacion;
 
     /**

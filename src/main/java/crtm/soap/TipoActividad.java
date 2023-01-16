@@ -1,30 +1,29 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for TipoActividad.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="TipoActividad">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="SALIDA_DE_COCHERAS"/>
- *     &lt;enumeration value="LLEGADA_A_COCHERAS"/>
- *     &lt;enumeration value="SALIDA_DE_CABECERA"/>
- *     &lt;enumeration value="LLEGADA_A_TERMINAL"/>
- *     &lt;enumeration value="SALIDA_DE_ESTACION"/>
- *     &lt;enumeration value="LLEGADA_A_ESTACION"/>
- *     &lt;enumeration value="SALIDA_DE_REGULACION"/>
- *     &lt;enumeration value="LLEGADA_A_REGULACION"/>
- *     &lt;enumeration value="OTRO"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
+ * <pre>{@code
+ * <simpleType name="TipoActividad">
+ *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     <enumeration value="SALIDA_DE_COCHERAS"/>
+ *     <enumeration value="LLEGADA_A_COCHERAS"/>
+ *     <enumeration value="SALIDA_DE_CABECERA"/>
+ *     <enumeration value="LLEGADA_A_TERMINAL"/>
+ *     <enumeration value="SALIDA_DE_ESTACION"/>
+ *     <enumeration value="LLEGADA_A_ESTACION"/>
+ *     <enumeration value="SALIDA_DE_REGULACION"/>
+ *     <enumeration value="LLEGADA_A_REGULACION"/>
+ *     <enumeration value="OTRO"/>
+ *   </restriction>
+ * </simpleType>
+ * }</pre>
  * 
  */
 @XmlType(name = "TipoActividad")

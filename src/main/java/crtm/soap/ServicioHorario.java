@@ -1,12 +1,12 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -14,27 +14,27 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="ServicioHorario">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="codServicioHorario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="codModo" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="nombreServicio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="tipoServicio" type="{GEIS.MultimodalInfoWebService}TipoServicio"/>
- *         &lt;element name="diaInicio" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="diaFin" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="tipoDia" type="{GEIS.MultimodalInfoWebService}TipoDia"/>
- *         &lt;element name="dias" type="{GEIS.MultimodalInfoWebService}ArrayOfString" minOccurs="0"/>
- *         &lt;element name="diasNoValidos" type="{GEIS.MultimodalInfoWebService}ArrayOfDateTime" minOccurs="0"/>
- *         &lt;element name="diasAniadidos" type="{GEIS.MultimodalInfoWebService}ArrayOfDateTime" minOccurs="0"/>
- *         &lt;element name="expediciones" type="{GEIS.MultimodalInfoWebService}ArrayOfString" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="ServicioHorario">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="codServicioHorario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="codModo" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="nombreServicio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="tipoServicio" type="{GEIS.MultimodalInfoWebService}TipoServicio"/>
+ *         <element name="diaInicio" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="diaFin" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="tipoDia" type="{GEIS.MultimodalInfoWebService}TipoDia"/>
+ *         <element name="dias" type="{GEIS.MultimodalInfoWebService}ArrayOfString" minOccurs="0"/>
+ *         <element name="diasNoValidos" type="{GEIS.MultimodalInfoWebService}ArrayOfDateTime" minOccurs="0"/>
+ *         <element name="diasAniadidos" type="{GEIS.MultimodalInfoWebService}ArrayOfDateTime" minOccurs="0"/>
+ *         <element name="expediciones" type="{GEIS.MultimodalInfoWebService}ArrayOfString" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -58,6 +58,7 @@ public class ServicioHorario {
     protected int codModo;
     protected String nombreServicio;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected TipoServicio tipoServicio;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
@@ -66,6 +67,7 @@ public class ServicioHorario {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar diaFin;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected TipoDia tipoDia;
     protected ArrayOfString dias;
     protected ArrayOfDateTime diasNoValidos;

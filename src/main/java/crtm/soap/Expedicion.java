@@ -1,12 +1,12 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -14,29 +14,29 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="Expedicion">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="codModo" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="codLinea" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="codItinerario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="nameItinerary" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="codExpedicion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="nombreExpedicion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="idaVuelta" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="tipoExpedicion" type="{GEIS.MultimodalInfoWebService}TipoExpedicion"/>
- *         &lt;element name="codEstacionOrigen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="codEstacionDestino" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="horaInicio" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="horaFin" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="actividades" type="{GEIS.MultimodalInfoWebService}ArrayOfActividad" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="Expedicion">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="codModo" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="codLinea" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="codItinerario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="nameItinerary" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="codExpedicion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="nombreExpedicion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="idaVuelta" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="tipoExpedicion" type="{GEIS.MultimodalInfoWebService}TipoExpedicion"/>
+ *         <element name="codEstacionOrigen" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="codEstacionDestino" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="horaInicio" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="horaFin" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *         <element name="actividades" type="{GEIS.MultimodalInfoWebService}ArrayOfActividad" minOccurs="0"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -66,6 +66,7 @@ public class Expedicion {
     protected String nombreExpedicion;
     protected int idaVuelta;
     @XmlElement(required = true)
+    @XmlSchemaType(name = "string")
     protected TipoExpedicion tipoExpedicion;
     protected String codEstacionOrigen;
     protected String codEstacionDestino;

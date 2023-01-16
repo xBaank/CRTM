@@ -1,33 +1,32 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for AlertCause.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="AlertCause">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="DESCONOCIDA"/>
- *     &lt;enumeration value="OTRA_CAUSA"/>
- *     &lt;enumeration value="PROBLEMA_TÉCNICO"/>
- *     &lt;enumeration value="HUELGA"/>
- *     &lt;enumeration value="DEMOSTRACIÓN"/>
- *     &lt;enumeration value="ACCIDENTE"/>
- *     &lt;enumeration value="VACACIONES"/>
- *     &lt;enumeration value="TEMPORAL_ATMOSFÉRICO"/>
- *     &lt;enumeration value="MANTENIMIENTO"/>
- *     &lt;enumeration value="OBRAS"/>
- *     &lt;enumeration value="ACTIVIDAD_POLICIAL"/>
- *     &lt;enumeration value="EMERGENCIA_MÉDICA"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
+ * <pre>{@code
+ * <simpleType name="AlertCause">
+ *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     <enumeration value="DESCONOCIDA"/>
+ *     <enumeration value="OTRA_CAUSA"/>
+ *     <enumeration value="PROBLEMA_TÉCNICO"/>
+ *     <enumeration value="HUELGA"/>
+ *     <enumeration value="DEMOSTRACIÓN"/>
+ *     <enumeration value="ACCIDENTE"/>
+ *     <enumeration value="VACACIONES"/>
+ *     <enumeration value="TEMPORAL_ATMOSFÉRICO"/>
+ *     <enumeration value="MANTENIMIENTO"/>
+ *     <enumeration value="OBRAS"/>
+ *     <enumeration value="ACTIVIDAD_POLICIAL"/>
+ *     <enumeration value="EMERGENCIA_MÉDICA"/>
+ *   </restriction>
+ * </simpleType>
+ * }</pre>
  * 
  */
 @XmlType(name = "AlertCause")

@@ -1,12 +1,12 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -14,22 +14,22 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
- * <pre>
- * &lt;complexType name="KML">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="identifier" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="name" type="{GEIS.MultimodalInfoWebService}ArrayOfLanguageName" minOccurs="0"/>
- *         &lt;element name="description" type="{GEIS.MultimodalInfoWebService}ArrayOfLanguageName" minOccurs="0"/>
- *         &lt;element name="URL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="URLIcon" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="updateDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
+ * <pre>{@code
+ * <complexType name="KML">
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element name="identifier" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         <element name="name" type="{GEIS.MultimodalInfoWebService}ArrayOfLanguageName" minOccurs="0"/>
+ *         <element name="description" type="{GEIS.MultimodalInfoWebService}ArrayOfLanguageName" minOccurs="0"/>
+ *         <element name="URL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="URLIcon" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="updateDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
+ *       </sequence>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */

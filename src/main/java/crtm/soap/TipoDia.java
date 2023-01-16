@@ -1,27 +1,26 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for TipoDia.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="TipoDia">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="LB"/>
- *     &lt;enumeration value="LV"/>
- *     &lt;enumeration value="VF"/>
- *     &lt;enumeration value="FV"/>
- *     &lt;enumeration value="FN"/>
- *     &lt;enumeration value="TO"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
+ * <pre>{@code
+ * <simpleType name="TipoDia">
+ *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     <enumeration value="LB"/>
+ *     <enumeration value="LV"/>
+ *     <enumeration value="VF"/>
+ *     <enumeration value="FV"/>
+ *     <enumeration value="FN"/>
+ *     <enumeration value="TO"/>
+ *   </restriction>
+ * </simpleType>
+ * }</pre>
  * 
  */
 @XmlType(name = "TipoDia")

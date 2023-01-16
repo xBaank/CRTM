@@ -1,30 +1,29 @@
 
 package crtm.soap;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for AlertEffect.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p>
- * <pre>
- * &lt;simpleType name="AlertEffect">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="SIN_SERVICIO"/>
- *     &lt;enumeration value="SERVICIO_REDUCIDO"/>
- *     &lt;enumeration value="RETRASOS_IMPORTANTES"/>
- *     &lt;enumeration value="DESVÍO"/>
- *     &lt;enumeration value="SERVICIO_ADICIONAL"/>
- *     &lt;enumeration value="SERVICIO_MODIFICADO"/>
- *     &lt;enumeration value="OTRO_EFECTO"/>
- *     &lt;enumeration value="EFECTO_DESCONOCIDO"/>
- *     &lt;enumeration value="MOVIMIENTO_PARADO"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
+ * <pre>{@code
+ * <simpleType name="AlertEffect">
+ *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *     <enumeration value="SIN_SERVICIO"/>
+ *     <enumeration value="SERVICIO_REDUCIDO"/>
+ *     <enumeration value="RETRASOS_IMPORTANTES"/>
+ *     <enumeration value="DESVÍO"/>
+ *     <enumeration value="SERVICIO_ADICIONAL"/>
+ *     <enumeration value="SERVICIO_MODIFICADO"/>
+ *     <enumeration value="OTRO_EFECTO"/>
+ *     <enumeration value="EFECTO_DESCONOCIDO"/>
+ *     <enumeration value="MOVIMIENTO_PARADO"/>
+ *   </restriction>
+ * </simpleType>
+ * }</pre>
  * 
  */
 @XmlType(name = "AlertEffect")
